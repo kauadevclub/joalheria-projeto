@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éclat | Joalheria de Luxo</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B38B2D;
+            --black: #1A1A1A;
+            --white: #F8F8F8;
+            --gray: #E5E5E5;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .navbar {
+            background-color: rgba(26, 26, 26, 0.95) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: var(--black) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--gold) !important;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: var(--white) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), 
+                        url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+            background-size: cover;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--black);
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+        
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+        
+        .btn-outline-gold {
+            background-color: transparent;
+            color: var(--gold);
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+        
+        .btn-outline-gold:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            color: var(--black);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            background-color: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .product-title {
+            color: var(--black);
+            font-family: 'Playfair Display', serif;
+            margin-top: 15px;
+        }
+        
+        .product-price {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .about-section {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 100px 0;
+        }
+        
+        .about-img {
+            box-shadow: 20px 20px 0px var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .about-img:hover {
+            box-shadow: 10px 10px 0px var(--gold);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(212, 175, 55, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 0;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-control {
+            border-radius: 0;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--gold);
+        }
+        
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-title {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        
+        .social-icon {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .about-img {
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: auto;
+                padding: 120px 0;
+                min-height: auto;
+            }
+            
+            .section-title {
+                margin-bottom: 40px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ÉCLAT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Coleção</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="display-3 mb-4">Joias que Contam Histórias</h1>
+                <p class="lead mb-5">Descubra peças exclusivas criadas com os mais finos materiais e artesanato excepcional. Cada joia Éclat é uma obra de arte.</p>
+                <a href="#" class="btn btn-gold">Ver Coleção</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <h2 class="text-center section-title">Nossas Criações</h2>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top product-img" alt="Anel de Diamante">
+                        <div class="card-body text-center">
+                            <h3 class="product-title">Anel Solitaire</h3>
+                            <p class="text-muted mb-3">Diamante de corte brilhante em ouro 18k</p>
+                            <p class="product-price">R$ 12.500</p>
+                            <a href="#" class="btn btn-outline-gold">Ver Mais</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top product-img" alt="Colar de Pérolas">
+                        <div class="card-body text-center">
+                            <h3 class="product-title">Colar de Pérolas</h3>
+                            <p class="text-muted mb-3">Pérolas naturais do Taiti com fecho em ouro branco</p>
+                            <p class="product-price">R$ 8.900</p>
+                            <a href="#" class="btn btn-outline-gold">Ver Mais</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1603974375393-9d5e1b420e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top product-img" alt="Brincos de Esmeralda">
+                        <div class="card-body text-center">
+                            <h3 class="product-title">Brincos Esmeralda</h3>
+                            <p class="text-muted mb-3">Esmeraldas colombianas em ouro amarelo 18k</p>
+                            <p class="product-price">R$ 6.750</p>
+                            <a href="#" class="btn btn-outline-gold">Ver Mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-gold">Ver Coleção Completa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sobre a Éclat" class="img-fluid about-img">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title text-white">Sobre Nós</h2>
+                    <p>Fundada em 1985, a Éclat Joalheria nasceu da paixão por criar peças únicas que transcendem o tempo. Nossa história é marcada pela busca incessante pela perfeição e pelo respeito aos materiais mais nobres.</p>
+                    <p>Cada joia que criamos é fruto de um minucioso processo artesanal, combinando técnicas tradicionais com design contemporâneo. Nossos mestres joalheiros dedicam horas de trabalho meticuloso para garantir que cada peça atenda aos mais altos padrões de qualidade.</p>
+                    <p>Mais do que acessórios, nossas joias são símbolos de momentos especiais, transmitidos de geração em geração.</p>
+                    <a href="#" class="btn btn-outline-gold mt-3">Nossa História</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <h2 class="text-center section-title">Galeria</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Joia 1" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="text-white">Coleção Primavera</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Joia 2" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="text-white">Anéis Exclusivos</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1603974375393-9d5e1b420e10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Joia 3" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="text-white">Brincos de Gala</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Joia 4" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="text-white">Colares Clássicos</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Depoimentos</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Comprei um anel de noivado na Éclat e fiquei impressionado com a qualidade e atenção aos detalhes. Minha noiva adorou e recebe muitos elogios."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente 1" class="rounded-circle me-3" width="60">
+                            <div>
+                                <h5 class="mb-0">Ricardo Silva</h5>
+                                <p class="testimonial-author mb-0">São Paulo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"A Éclat transformou um colar de família em uma peça moderna sem perder sua essência. O trabalho de restauro foi impecável e superou minhas expectativas."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente 2" class="rounded-circle me-3" width="60">
+                            <div>
+                                <h5 class="mb-0">Ana Beatriz</h5>
+                                <p class="testimonial-author mb-0">Rio de Janeiro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Há anos sou cliente da Éclat e sempre me surpreendo com a criatividade e exclusividade das peças. O atendimento personalizado faz toda a diferença."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente 3" class="rounded-circle me-3" width="60">
+                            <div>
+                                <h5 class="mb-0">Fernanda Oliveira</h5>
+                                <p class="testimonial-author mb-0">Belo Horizonte</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">Entre em Contato</h2>
+                    <p>Estamos à disposição para esclarecer dúvidas, agendar visitas personalizadas ou criar peças exclusivas sob medida.</p>
+                    <div class="mt-4">
+                        <h5 class="d-flex align-items-center mb-3">
+                            <i class="fas fa-map-marker-alt me-3" style="color: var(--gold);"></i>
+                            Endereço
+                        </h5>
+                        <p>Av. Paulista, 1000 - São Paulo, SP</p>
+                        
+                        <h5 class="d-flex align-items-center mb-3 mt-4">
+                            <i class="fas fa-phone-alt me-3" style="color: var(--gold);"></i>
+                            Telefone
+                        </h5>
+                        <p>(11) 1234-5678</p>
+                        
+                        <h5 class="d-flex align-items-center mb-3 mt-4">
+                            <i class="fas fa-envelope me-3" style="color: var(--gold);"></i>
+                            Email
+                        </h5>
+                        <p>contato@eclatjoias.com.br</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <h4 class="mb-4">Envie uma Mensagem</h4>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Seu Nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Seu Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Sua Mensagem" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gold w-100">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="footer-title">ÉCLAT</h4>
+                    <p>Joalheria de luxo especializada em peças exclusivas e sob medida, criadas com os mais nobres materiais e técnicas artesanais refinadas.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <h4 class="footer-title">Links</h4>
+                    <a href="#" class="footer-link">Início</a>
+                    <a href="#" class="footer-link">Coleção</a>
+                    <a href="#" class="footer-link">Sobre Nós</a>
+                    <a href="#" class="footer-link">Contato</a>
+                    <a href="#" class="footer-link">Blog</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <h4 class="footer-title">Serviços</h4>
+                    <a href="#" class="footer-link">Joias Sob Medida</a>
+                    <a href="#" class="footer-link">Restauração</a>
+                    <a href="#" class="footer-link">Avaliação de Joias</a>
+                    <a href="#" class="footer-link">Presentes</a>
+                    <a href="#" class="footer-link">Consultoria</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p>Assine nossa newsletter para receber novidades e promoções exclusivas.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Seu Email" required>
+                            <button class="btn btn-gold" type="submit">Assinar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p class="mb-0">&copy; 2023 Éclat Joalheria. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animation on scroll
+        window.addEventListener('load', function() {
+            const elements = document.querySelectorAll('.product-card, .testimonial-card, .gallery-item');
+            
+            const animateOnScroll = function() {
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if(elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>
