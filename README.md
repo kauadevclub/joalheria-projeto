@@ -66,7 +66,7 @@ O site se adapta perfeitamente a **dispositivos móveis, tablets e desktops**, m
 
 ## 🔗 Link do Projeto
 
-[👉 Clique aqui para visualizar o site](https://seuusuario.github.io/nome-do-repositorio)
+[https://kauadevclub.github.io/joalheria-projeto/)
 
 
 
